@@ -3,7 +3,8 @@
 import { useAtomValue } from "jotai";
 import Login from "./Login";
 import NavBar from "./NavBar"
-import { isVisibleAtom } from "@/atoms";
+import { isSignupVisibleAtom, isVisibleAtom } from "@/atoms";
+import Signup from "./Signup";
 
 interface Props {
     children: React.ReactNode
@@ -11,11 +12,25 @@ interface Props {
 
 const HomeLayout = ({ children }: Props) => {
     const isVisible = useAtomValue(isVisibleAtom);
+    const isSignupVisible = useAtomValue(isSignupVisibleAtom);
 
     return (
         <>
+            {
+                (isVisible || isSignupVisible) &&
+                <style jsx global>
+                {
+                    `
+                    html, body {
+                        overflow: hidden;
+                    }
+                    `
+                }
+                </style>
+            }
             <NavBar />
             <Login isVisible={isVisible} />
+            <Signup isVisible={isSignupVisible} />
             {children}
         </>
     )

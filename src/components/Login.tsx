@@ -1,8 +1,9 @@
 'use client'
 
-import { isVisibleAtom } from "@/atoms";
+import { isSignupVisibleAtom, isVisibleAtom } from "@/atoms";
 import { useSetAtom } from "jotai";
 import Link from "next/link";
+import Input from "./Input";
 
 interface Props {
     isVisible?: boolean
@@ -11,6 +12,7 @@ interface Props {
 
 const Login = ({ isVisible }: Props) => {
     const setIsVisible = useSetAtom(isVisibleAtom);
+    const setIsSignupVisible = useSetAtom(isSignupVisibleAtom);
 
     return (
         <div className={`${!isVisible && "tw-hidden"} tw-bg-[rgb(0,0,0)] tw-bg-[rgba(0,0,0,0.4)] tw-fixed tw-top-0 tw-left-0 tw-w-full tw-h-full tw-px-[16px]`}>
@@ -26,13 +28,13 @@ const Login = ({ isVisible }: Props) => {
                     <form className="tw-my-5 tw-flex tw-flex-col tw-gap-10">
                         <div className="tw-flex tw-flex-col tw-gap-5">
                             <div className="tw-flex tw-flex-col tw-gap-2">
-                                <input type="text" placeholder="Email" className="tw-rounded-xl tw-py-[16px] tw-px-[16px] tw-bg-gray-300 tw-outline-none tw-w-full" />
+                                <Input type="email" placeholder="Email" className="tw-px-[16px] tw-py-[16px]" />
                                 <small className="tw-text-red-600">
                                     *Error
                                 </small>
                             </div>
                             <div className="tw-flex tw-flex-col tw-gap-2">
-                                <input type="password" placeholder="Password" className="tw-rounded-xl tw-py-[16px] tw-px-[16px] tw-bg-gray-300 tw-outline-none tw-w-full" />
+                                <Input type="password" placeholder="Password" className="tw-px-[16px] tw-py-[16px]" />
                                 <small className="tw-text-red-600">
                                     *Error
                                 </small>
@@ -43,9 +45,13 @@ const Login = ({ isVisible }: Props) => {
                                 Log In
                             </button>
                             <small>or</small>
-                            <Link href="/" className="tw-text-[13px] tw-text-blue-600">
+                            <span className="tw-text-[13px] tw-text-blue-600 tw-cursor-pointer" 
+                            onClick={e => {
+                                setIsVisible(false);
+                                setIsSignupVisible(true);
+                            }}>
                                 Sign up
-                            </Link>
+                            </span>
                         </div>
                     </form>
                 </div>

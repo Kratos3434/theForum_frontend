@@ -1,13 +1,13 @@
 'use client'
 import { isVisibleAtom } from "@/atoms";
-import { useAtom } from "jotai";
+import { useSetAtom } from "jotai";
 import Link from "next/link";
 
 const NavBar = () => {
-    const [isVisible, setIsVisible] = useAtom(isVisibleAtom);
+    const setIsVisible = useSetAtom(isVisibleAtom);
 
     return (
-        <nav className="tw-top-0 tw-left-0 tw-fixed tw-w-full tw-h-[80px] tw-shadow-xl tw-bg-white tw-px-[16px] tw-py-[8px]">
+        <nav className="tw-top-0 tw-left-0 tw-fixed tw-w-full tw-h-[60px] tw-shadow-xl tw-bg-white tw-px-[16px] tw-py-[8px]">
             <div className="tw-w-full tw-flex tw-items-center tw-h-full tw-relative">
                 <Link className="tw-font-extrabold tw-text-[30px] tw-text-red-400 tw-absolute tw-left-0" href="/">
                     The Forum

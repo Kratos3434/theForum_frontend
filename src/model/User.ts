@@ -1,6 +1,8 @@
 class User {
     private id: number;
     private email: string;
+    private password: string;
+    private password2: string;
     private firstName: string;
     private lastName: string;
     private verified: boolean;
@@ -8,13 +10,15 @@ class User {
     private updatedAt?: string;
     private verificationToken?: VerificationToken;
 
-    constructor(id: number, firstName: string, lastName: string, email: string, verified: boolean, createdAt: string, updatedAt?: string) {
-        this.id = id;
-        this.email = email;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.verified = verified;
-        this.createdAt = createdAt;
+    constructor(id?: number, firstName?: string, lastName?: string, email?: string, verified?: boolean, createdAt?: string, updatedAt?: string) {
+        this.id = id ?? 0;
+        this.email = email ?? "";
+        this.firstName = firstName ?? "";
+        this.lastName = lastName ?? "";
+        this.verified = verified ?? false;
+        this.createdAt = createdAt ?? "";
+        this.password = "";
+        this.password2 = "";
         this.updatedAt = updatedAt;
     }
 
@@ -54,6 +58,10 @@ class User {
         this.email = email;
     }
 
+    setFirstName(firstName: string) {
+        this.firstName = firstName;
+    }
+
     setLastName(lastName: string) {
         this.lastName = lastName;
     } 
@@ -77,4 +85,22 @@ class User {
     getVerificationToken() {
         return this.verificationToken;
     }
+
+    getPassword() {
+        return this.password;
+    }
+
+    setPassword(password: string) {
+        this.password = password;
+    }
+
+    getPassword2() {
+        return this.password2;
+    }
+
+    setPassword2(password2: string) {
+        this.password2 = password2;
+    } 
 }
+
+export default User;
