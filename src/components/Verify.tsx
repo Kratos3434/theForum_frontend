@@ -5,10 +5,11 @@ import UserController from "@/controller/UserController";
 import { useSetAtom } from "jotai";
 import Link from "next/link";
 import { useState } from "react";
+import Loading from "./Loading";
 
 const Verify = ({ data, token }: { data: any, token: string }) => {
     const [loading, isLoading] = useState(false);
-    const [result, setResult] = useState<{ status: boolean, error: string } | null>({status: true, error: "some error"});
+    const [result, setResult] = useState<{ status: boolean, error: string, verified: boolean } | null>(null);
     const setIsVisible = useSetAtom(isVisibleAtom);
 
     const verifyUser = async (e: any) => {
@@ -33,7 +34,7 @@ const Verify = ({ data, token }: { data: any, token: string }) => {
                                     </div>
                                 ) :
                                 (
-                                    result.status ?
+                                    result.status || result.verified ?
                                         (
                                             <div className="tw-flex tw-flex-col tw-gap-5">
                                                 <span className="tw-text-[30px] tw-font-bold">
@@ -52,6 +53,7 @@ const Verify = ({ data, token }: { data: any, token: string }) => {
                                         )
                                 )
                         }
+                        <Loading />
                     </div>
                 </>
             ) :

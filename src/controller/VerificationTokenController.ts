@@ -8,7 +8,6 @@ class VerificationTokenController {
         });
 
         const data = await res.json();
-
         return data;
     }
 }

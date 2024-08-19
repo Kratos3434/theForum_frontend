@@ -8,7 +8,7 @@ class UserController {
         });
 
         const response = await res.json();
-        
+
         return response;
 
     }
