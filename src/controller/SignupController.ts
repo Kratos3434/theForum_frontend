@@ -2,17 +2,12 @@ import User from "@/model/User";
 
 class SignupController {
     public static signup(user: User) {
-        console.log(user.getFirstName());
-        if (!user.getFirstName()) {
-            return { status: false, error: "First name is required" };
-        }
-
-        if (!user.getLastName()) {
-            return { status: false, error: "Last name is required" };
-        }
-
         if (!user.getEmail()) {
             return { status: false, error: "Email is required" };
+        }
+
+        if (!user.getUsername()) {
+            return { status: false, error: "Username is required" };
         }
 
         if (!user.getPassword()) {

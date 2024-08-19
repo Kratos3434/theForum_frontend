@@ -29,8 +29,8 @@ const HomeLayout = ({ children }: Props) => {
                 </style>
             }
             <NavBar />
-            <Login isVisible={isVisible} />
-            <Signup isVisible={isSignupVisible} />
+            { isVisible && <Login /> }
+            { isSignupVisible && <Signup /> }
             {children}
         </>
     )

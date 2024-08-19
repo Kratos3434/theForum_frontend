@@ -5,17 +5,12 @@ import { useSetAtom } from "jotai";
 import Link from "next/link";
 import Input from "./Input";
 
-interface Props {
-    isVisible?: boolean
-}
-
-
-const Login = ({ isVisible }: Props) => {
+const Login = () => {
     const setIsVisible = useSetAtom(isVisibleAtom);
     const setIsSignupVisible = useSetAtom(isSignupVisibleAtom);
 
     return (
-        <div className={`${!isVisible && "tw-hidden"} tw-bg-[rgb(0,0,0)] tw-bg-[rgba(0,0,0,0.4)] tw-fixed tw-top-0 tw-left-0 tw-w-full tw-h-full tw-px-[16px]`}>
+        <div className={`tw-bg-[rgb(0,0,0)] tw-bg-[rgba(0,0,0,0.4)] tw-fixed tw-top-0 tw-left-0 tw-w-full tw-h-full tw-px-[16px]`}>
             <div className="tw-w-full tw-h-full tw-flex tw-justify-center tw-items-center" onClick={e => setIsVisible(false)}>
                 <div className="tw-bg-white tw-shadow-lg tw-rounded-md tw-py-[8px] tw-px-[16px] tw-max-w-[500px] tw-w-full tw-relative" onClick={e => e.stopPropagation()}>
                     <div className="tw-absolute tw-top-[8px] tw-right-[16px] tw-py-[8px] tw-px-[13px] tw-rounded-full tw-bg-gray-300 tw-cursor-pointer hover:tw-brightness-90" 

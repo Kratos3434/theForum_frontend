@@ -1,3 +1,4 @@
+import User from "./User";
 
 class VerificationToken {
     private id: number;
@@ -56,3 +57,5 @@ class VerificationToken {
         this.user = user;
     }
 }
+
+export default VerificationToken;

@@ -1,25 +1,25 @@
+import VerificationToken from "./VerificationToken";
+
 class User {
     private id: number;
     private email: string;
+    private username: string;
     private password: string;
     private password2: string;
-    private firstName: string;
-    private lastName: string;
     private verified: boolean;
     private createdAt: string;
     private updatedAt?: string;
     private verificationToken?: VerificationToken;
 
-    constructor(id?: number, firstName?: string, lastName?: string, email?: string, verified?: boolean, createdAt?: string, updatedAt?: string) {
+    constructor(id?: number, username?: string, email?: string, verified?: boolean, createdAt?: string, updatedAt?: string) {
         this.id = id ?? 0;
         this.email = email ?? "";
-        this.firstName = firstName ?? "";
-        this.lastName = lastName ?? "";
         this.verified = verified ?? false;
         this.createdAt = createdAt ?? "";
         this.password = "";
         this.password2 = "";
         this.updatedAt = updatedAt;
+        this.username = username ?? "";
     }
 
     getId() {
@@ -28,14 +28,6 @@ class User {
 
     getEmail() {
         return this.email;
-    }
-
-    getFirstName() {
-        return this.firstName;
-    }
-
-    getLastName() {
-        return this.lastName;
     }
 
     isVerified() {
@@ -57,14 +49,6 @@ class User {
     setEmail(email: string) {
         this.email = email;
     }
-
-    setFirstName(firstName: string) {
-        this.firstName = firstName;
-    }
-
-    setLastName(lastName: string) {
-        this.lastName = lastName;
-    } 
 
     setIsVerified(verified: boolean) {
         this.verified = verified;
@@ -101,6 +85,14 @@ class User {
     setPassword2(password2: string) {
         this.password2 = password2;
     } 
+
+    getUsername() {
+        return this.username;
+    }
+
+    setUsername(username: string) {
+        this.username = username;
+    }
 }
 
 export default User;
