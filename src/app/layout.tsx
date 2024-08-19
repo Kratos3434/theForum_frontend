@@ -4,7 +4,7 @@ import "./globals.css";
 import NavBar from "@/components/NavBar";
 import Login from "@/components/Login";
 import HomeLayout from "@/components/HomeLayout";
-
+//test
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
