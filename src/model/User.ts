@@ -10,14 +10,18 @@ class User {
     private createdAt: string;
     private updatedAt?: string;
     private verificationToken?: VerificationToken;
+    private picture: string;
+    private coverPicture: string;
 
-    constructor(id?: number, username?: string, email?: string, verified?: boolean, createdAt?: string, updatedAt?: string) {
+    constructor(id?: number, username?: string, email?: string, verified?: boolean, picture?: string, coverPicture?: string, createdAt?: string, updatedAt?: string) {
         this.id = id ?? 0;
         this.email = email ?? "";
         this.verified = verified ?? false;
         this.createdAt = createdAt ?? "";
         this.password = "";
         this.password2 = "";
+        this.picture = picture ?? "";
+        this.coverPicture = coverPicture ?? "";
         this.updatedAt = updatedAt;
         this.username = username ?? "";
     }
@@ -92,6 +96,22 @@ class User {
 
     setUsername(username: string) {
         this.username = username;
+    }
+
+    getPicture() {
+        return this.picture;
+    }
+
+    getCoverPicture() {
+        return this.coverPicture;
+    }
+
+    setPicture(picture: string) {
+        this.picture = picture
+    }
+
+    setCoverPicture(coverPicture: string) {
+        this.coverPicture = coverPicture;
     }
 }
 

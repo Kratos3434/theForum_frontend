@@ -18,7 +18,7 @@ const HomeLayout = ({ children }: Props) => {
         <>
             {
                 (isVisible || isSignupVisible) &&
-                <style jsx global>
+                <style jsx global >
                 {
                     `
                     html, body {
