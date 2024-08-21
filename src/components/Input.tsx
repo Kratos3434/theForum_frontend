@@ -17,7 +17,7 @@ const Input = ({ placeholder, className, type, onChange }: Props) => {
     return (
         type === "password" ?
             (
-                <div className={`tw-border-2 tw-border-white focus:tw-border-red-400 tw-rounded-xl tw-w-full tw-bg-gray-300 tw-flex ${className}`} tabIndex={1} onChange={onChange} >
+                <div className={`tw-border-[1px] tw-border-white tw-rounded-xl tw-w-full tw-bg-gray-300 tw-flex ${className}`} tabIndex={1} onChange={onChange} >
                     <input type={passwordType} placeholder={placeholder} className="tw-w-full tw-bg-inherit" />
                     {
                         passwordType === "password" ?
@@ -36,7 +36,7 @@ const Input = ({ placeholder, className, type, onChange }: Props) => {
             ) :
             (
                 <input type={type} placeholder={placeholder}
-                    className={`tw-border-2 tw-border-white focus:tw-border-red-400 tw-rounded-xl tw-w-full tw-bg-gray-300 ${className}`}
+                    className={`tw-border-[1px] tw-border-white tw-rounded-xl tw-w-full tw-bg-gray-300 ${className}`}
                     onChange={onChange} />
             )
     );

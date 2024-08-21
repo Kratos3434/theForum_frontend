@@ -55,9 +55,9 @@ const NavBar = () => {
                                     {
                                         expand &&
                                         (
-                                            <div className="tw-absolute tw-top-[60px] tw-right-0">
+                                            <div className="tw-absolute tw-top-[50px] tw-right-0">
                                                 <div className="tw-rounded-xl tw-bg-white tw-shadow-lg tw-p-[8px] tw-py-[16px] tw-w-[200px] tw-flex tw-gap-2 tw-flex-col">
-                                                    <Link className="tw-w-full tw-text-center tw-rounded-full tw-bg-red-400 tw-py-[8px] tw-px-[16px] tw-cursor-pointer hover:tw-brightness-90 tw-flex tw-gap-2 tw-justify-center tw-items-center" href="/">
+                                                    <Link className="tw-w-full tw-text-center tw-rounded-full tw-bg-red-400 tw-py-[8px] tw-px-[16px] tw-cursor-pointer hover:tw-brightness-90 tw-flex tw-gap-2 tw-items-center" href="/">
                                                         <img src={currentUser.getPicture()} width={30} height={30} alt={currentUser.getUsername()} className="tw-rounded-full" />
                                                         <span className="tw-font-bold tw-text-white">
                                                             Profile
@@ -78,12 +78,12 @@ const NavBar = () => {
                             </span>
                         ) :
                         (
-                            <span className="tw-absolute tw-right-0 tw-rounded-full tw-bg-red-400 tw-py-[8px] tw-px-[16px] tw-cursor-pointer hover:tw-brightness-90"
-                                onClick={e => setIsVisible(true)}>
+                            <Link href="/login" className="tw-absolute tw-right-0 tw-rounded-full tw-bg-red-400 tw-py-[8px] tw-px-[16px] tw-cursor-pointer hover:tw-brightness-90"
+                                >
                                 <span className="tw-font-bold tw-text-white">
                                     Log in
                                 </span>
-                            </span>
+                            </Link>
                         )
                 }
             </div>
