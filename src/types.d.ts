@@ -1,25 +1,25 @@
-export interface User {
+export interface IUser {
     id: number,
     email: string,
     password: string,
     verified: boolean,
-    userProfile?: UserProfile,
+    userProfile?: IUserProfile,
     verificationToken?: VerificationToken,
     createdAt: string,
     updatedAt?: string
 }
 
-export interface UserProfile {
+export interface IUserProfile {
     id: number,
-    firstName: string,
-    lastName: string,
-    user: User,
     userId: number,
+    user: User,
+    picture: string,
+    coverPicture: string,
     createdAt: string,
     updatedAt?: string
 }
 
-export interface VerificationToken {
+export interface IVerificationToken {
     id: number,
     token: string,
     user: User,

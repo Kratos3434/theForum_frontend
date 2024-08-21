@@ -5,12 +5,15 @@ import Input from "./Input";
 import { FormEvent, useState } from "react";
 import User from "@/model/User";
 import SignupController from "@/controller/SignupController";
+import CloseIcon from '@mui/icons-material/Close';
+import MailIcon from '@mui/icons-material/Mail';
 
 const Signup = () => {
     const setIsSignupVisible = useSetAtom(isSignupVisibleAtom);
     const setIsVisible = useSetAtom(isVisibleAtom);
     const [error, setError] = useState("");
     const user = useState(new User())[0];
+    const [open, isOpen] = useState(false);
 
     const handleSignup = (e: FormEvent<HTMLFormElement>) => {
         
@@ -21,6 +24,7 @@ const Signup = () => {
             setError(err);
         } else {
             setError("");
+            isOpen(true);
         }
     }
 
@@ -73,6 +77,30 @@ const Signup = () => {
                     </form>
                 </div>
             </div>
+            {
+                open &&
+                (
+                    <div className={`tw-fixed tw-top-0 tw-left-0 tw-bg-[rgb(0,0,0)] tw-bg-[rgba(0,0,0,0.4)] tw-w-full tw-h-full`}>
+                        <div className="tw-w-full tw-h-full tw-flex tw-justify-center tw-items-center">
+                            <div className="tw-bg-white tw-shadow-lg tw-rounded-md tw-py-[8px] tw-px-[16px] tw-max-w-[500px] tw-w-full tw-relative">
+                                <div className="tw-flex tw-justify-end">
+                                    <span className="tw-cursor-pointer" onClick={e => setIsSignupVisible(false)}>
+                                        <CloseIcon />
+                                    </span>
+                                </div>
+                                <div className="tw-flex tw-flex-col tw-items-center">
+                                    <div className="tw-font-extrabold tw-text-[30px] tw-my-4">
+                                        Welcome to <span className="tw-text-red-400">The Forum!</span>
+                                    </div>
+                                    <p>
+                                        Please check your inbox to activate your account <MailIcon />
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                )
+            }
         </div>
     );
 }

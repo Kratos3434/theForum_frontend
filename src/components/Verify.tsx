@@ -53,7 +53,7 @@ const Verify = ({ data, token }: { data: any, token: string }) => {
                                         )
                                 )
                         }
-                        {loading && <Loading />}
+                        {loading && <Loading message="Verifying, please wait..." />}
                     </div>
                 </>
             ) :

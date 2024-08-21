@@ -4,13 +4,28 @@ class UserController {
     public static async verify(token: string) {
         const res = await fetch(`${BASE_URL}/v1/user/verify/${token}`, {
             cache: 'no-store',
-            method: 'POST'
+            method: 'POST',
         });
 
         const response = await res.json();
 
         return response;
 
+    }
+
+    public static async getCurrent(token: string) {
+        const res = await fetch(`${BASE_URL}/v1/user/current`, {
+            method: 'GET',
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            },
+            next: {
+                tags: ['currentUser']
+            }
+        });
+
+        return await res.json();
     }
 }
 
