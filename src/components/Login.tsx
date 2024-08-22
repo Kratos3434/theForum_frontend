@@ -1,6 +1,4 @@
 'use client'
-
-import { isSignupVisibleAtom, isVisibleAtom } from "@/atoms";
 import { useSetAtom } from "jotai";
 import Link from "next/link";
 import Input from "./Input";
@@ -8,14 +6,15 @@ import { useState } from "react";
 import LoginController from "@/controller/LoginController";
 import Loading from "./Loading";
 import { useRouter } from "next/navigation";
+import { currentUserAtom } from "@/atoms";
+import User from "@/model/User";
 
 const Login = () => {
     const router = useRouter();
-    const setIsVisible = useSetAtom(isVisibleAtom);
-    const setIsSignupVisible = useSetAtom(isSignupVisibleAtom);
     const [logDetail, setLogDetail] = useState({ usernameOrEmail: "", password: "" });
     const [logResult, setLogResult] = useState({ status: false, error: "" });
     const [loading, isLoading] = useState(false);
+    const setCurrentUser = useSetAtom(currentUserAtom);
 
     const handleLogin = async (e: any) => {
         e.preventDefault();
@@ -25,8 +24,11 @@ const Login = () => {
         //isLoading(false);
         console.log(res);
         if (res.status) {
-            await fetch("/api/current");
+            //await fetch("/api/current");
+            setCurrentUser(new User(res.data.userId, res.data.user.username, res.data.user.email, res.data.user.verified, res.data.picture, res.data.coverPicture, res.data.createdAt, res.data.updatedAt))
             router.push("/");
+        } else {
+            isLoading(false);
         }
     }
 

@@ -12,8 +12,8 @@ class LoginController {
         }
     
         const res = await fetch(`${BASE_URL}/v1/user/login`, {
-            cache: 'no-store',
             credentials: 'include',
+            cache: 'no-cache',
             method: 'POST',
             headers: {
                 "Content-Type": "application/json"

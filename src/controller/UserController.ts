@@ -27,6 +27,15 @@ class UserController {
 
         return await res.json();
     }
+
+    public static async getByUsername(username: string) {
+        const res = await fetch(`${BASE_URL}/v1/user/profile/${username}`, {
+            method: 'GET',
+            cache: 'no-cache'
+        });
+
+        return await res.json();
+    }
 }
 
 export default UserController;

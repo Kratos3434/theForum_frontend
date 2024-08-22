@@ -1,5 +1,4 @@
 'use client'
-import { isSignupVisibleAtom, isVisibleAtom } from "@/atoms";
 import { useSetAtom } from "jotai";
 import Input from "./Input";
 import { FormEvent, useState } from "react";
@@ -11,19 +10,42 @@ import Link from "next/link";
 import Loading from "./Loading";
 
 const Signup = () => {
-    const setIsSignupVisible = useSetAtom(isSignupVisibleAtom);
-    const setIsVisible = useSetAtom(isVisibleAtom);
     const [error, setError] = useState("");
     const user = useState(new User())[0];
     const [open, isOpen] = useState(false);
     const [loading, isLoading] = useState(false);
 
-    const handleSignup = (e: FormEvent<HTMLFormElement>) => {
+    const inputs = [
+        {
+            label: "Email",
+            type: "email",
+            onchange: (e: any) => user.setEmail(e.target.value)
+        },
+        {
+            label: "Username",
+            type: "text",
+            onchange: (e: any) => user.setUsername(e.target.value)
+        },
+        {
+            label: "Password",
+            type: "password",
+            onchange: (e: any) => user.setPassword(e.target.value)
+        },
+        {
+            label: "Confirm Password",
+            type: "password",
+            onchange: (e: any) => user.setPassword2(e.target.value)
+        }
+    ];
+
+    const handleSignup = async (e: FormEvent<HTMLFormElement>) => {
 
         e.preventDefault();
-        const { status, error: err } = SignupController.signup(user);
+        isLoading(true);
+        const { status, error: err } = await SignupController.signup(user);
 
         if (!status) {
+            isLoading(false);
             setError(err);
         } else {
             setError("");
@@ -33,13 +55,13 @@ const Signup = () => {
 
     return (
         <div className="tw-w-full tw-h-[100dvh] tw-flex tw-justify-center tw-items-center tw-bg-red-400">
-            <div>
-                <span className="tw-text-red-600 tw-font-extrabold tw-text-[50px]">
-                    The Forum
+            <div className="tw-flex tw-gap-20 tw-items-center">
+                <span className="tw-text-red-600 tw-font-extrabold tw-text-[100px]">
+                    The Forum <br /> <small className="tw-text-black">The truth</small>
                 </span>
-                <div className="tw-my-[20px]">
+                <div className="tw-my-[20px] tw-border-l-[1px] tw-border-black tw-px-[25px]">
                     <div>
-                        <div className="tw-text-white tw-font-bold tw-text-[30px]">
+                        <div className="tw-text-white tw-font-bold tw-text-[50px]">
                             Register
                         </div>
                         <small className="tw-text-white">
@@ -50,20 +72,19 @@ const Signup = () => {
                         </small>
                     </div>
                     <form className="tw-my-[15px] tw-flex tw-flex-col tw-gap-5" onSubmit={handleSignup}>
-                        <div>
-                            <label className="tw-text-white">
-                                Email or Username
-                            </label>
-                            <Input className="tw-px-[16px] tw-py-[8px] tw-my-[5px] tw-border-black tw-bg-red-300" type="text" placeholder=""
-                            />
-                        </div>
-                        <div>
-                            <label className="tw-text-white">
-                                Password
-                            </label>
-                            <Input className="tw-px-[16px] tw-py-[8px] tw-my-[5px] tw-border-black tw-bg-red-300" type="password" placeholder=""
-                            />
-                        </div>
+                        {
+                            inputs.map((e, idx) => {
+                                return (
+                                    <div key={idx}>
+                                        <label className="tw-text-white">
+                                            {e.label}
+                                        </label>
+                                        <Input className="tw-px-[16px] tw-py-[8px] tw-my-[5px] tw-border-black tw-bg-red-300" type={e.type} placeholder=""
+                                        onChange={e.onchange}  />
+                                    </div>
+                                )
+                            })
+                        }
                         <div className="tw-mt-[30px] tw-text-center">
                             {
                                 error &&
@@ -80,25 +101,28 @@ const Signup = () => {
                     </form>
                 </div>
             </div>
-            {loading && <Loading message="Logging in, please wait..." />}
+            {loading && <Loading message="Signing up, please wait..." />}
             {
                 open &&
                 (
                     <div className={`tw-fixed tw-top-0 tw-left-0 tw-bg-[rgb(0,0,0)] tw-bg-[rgba(0,0,0,0.4)] tw-w-full tw-h-full`}>
                         <div className="tw-w-full tw-h-full tw-flex tw-justify-center tw-items-center">
-                            <div className="tw-bg-white tw-shadow-lg tw-rounded-md tw-py-[8px] tw-px-[16px] tw-max-w-[500px] tw-w-full tw-relative">
-                                <div className="tw-flex tw-justify-end">
+                            <div className="tw-bg-white tw-shadow-lg tw-rounded-md tw-py-[8px] tw-px-[16px] tw-relative">
+                                {/* <div className="tw-flex tw-justify-end">
                                     <span className="tw-cursor-pointer" onClick={e => setIsSignupVisible(false)}>
                                         <CloseIcon />
                                     </span>
-                                </div>
+                                </div> */}
                                 <div className="tw-flex tw-flex-col tw-items-center">
-                                    <div className="tw-font-extrabold tw-text-[30px] tw-my-4">
+                                    <div className="tw-font-extrabold tw-text-[50px] tw-my-4">
                                         Welcome to <span className="tw-text-red-400">The Forum!</span>
                                     </div>
-                                    <p>
+                                    <p className="tw-text-[20px]">
                                         Please check your inbox to activate your account <MailIcon />
                                     </p>
+                                    <Link href="/login" className="tw-p-[16px] tw-px-[40px] tw-bg-red-400 tw-rounded-xl tw-text-white tw-font-bold hover:tw-brightness-95 tw-my-[20px]">
+                                        Log In
+                                    </Link>
                                 </div>
                             </div>
                         </div>

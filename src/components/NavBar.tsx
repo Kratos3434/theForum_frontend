@@ -1,5 +1,5 @@
 'use client'
-import { currentUserAtom, isVisibleAtom } from "@/atoms";
+import { currentUserAtom } from "@/atoms";
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import Link from "next/link";
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
@@ -12,10 +12,9 @@ import { revalidateTag } from "next/cache";
 // }
 
 const NavBar = () => {
-    const setIsVisible = useSetAtom(isVisibleAtom);
     const [currentUser, setCurrentUser] = useAtom(currentUserAtom);
     const [expand, setExpand] = useState(false);
-
+    console.log(currentUser);
     const handleLogout = async (e: any) => {
         const res = await fetch('/api/logout');
         const result = await res.json();
@@ -57,7 +56,7 @@ const NavBar = () => {
                                         (
                                             <div className="tw-absolute tw-top-[50px] tw-right-0">
                                                 <div className="tw-rounded-xl tw-bg-white tw-shadow-lg tw-p-[8px] tw-py-[16px] tw-w-[200px] tw-flex tw-gap-2 tw-flex-col">
-                                                    <Link className="tw-w-full tw-text-center tw-rounded-full tw-bg-red-400 tw-py-[8px] tw-px-[16px] tw-cursor-pointer hover:tw-brightness-90 tw-flex tw-gap-2 tw-items-center" href="/">
+                                                    <Link className="tw-w-full tw-text-center tw-rounded-full tw-bg-red-400 tw-py-[8px] tw-px-[16px] tw-cursor-pointer hover:tw-brightness-90 tw-flex tw-gap-2 tw-items-center" href={`/profile/${currentUser.getUsername()}`}>
                                                         <img src={currentUser.getPicture()} width={30} height={30} alt={currentUser.getUsername()} className="tw-rounded-full" />
                                                         <span className="tw-font-bold tw-text-white">
                                                             Profile

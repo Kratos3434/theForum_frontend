@@ -1,6 +1,7 @@
 export interface IUser {
     id: number,
     email: string,
+    username: string
     password: string,
     verified: boolean,
     userProfile?: IUserProfile,
@@ -12,7 +13,7 @@ export interface IUser {
 export interface IUserProfile {
     id: number,
     userId: number,
-    user: User,
+    user: IUser,
     picture: string,
     coverPicture: string,
     createdAt: string,
@@ -22,7 +23,7 @@ export interface IUserProfile {
 export interface IVerificationToken {
     id: number,
     token: string,
-    user: User,
+    user: IUser,
     userId: number,
     createdAt: string,
     updatedAt?: string
