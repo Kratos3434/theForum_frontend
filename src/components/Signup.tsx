@@ -57,7 +57,7 @@ const Signup = () => {
         <div className="tw-w-full tw-h-[100dvh] tw-flex tw-justify-center tw-items-center tw-bg-red-400">
             <div className="tw-flex tw-gap-20 tw-items-center">
                 <span className="tw-text-red-600 tw-font-extrabold tw-text-[100px]">
-                    The Forum <br /> <small className="tw-text-black">The truth</small>
+                    The Forum <br /> <small className="tw-text-blue-400">Free Speech <br/> <span className="tw-text-green-400">Unlimited</span></small>
                 </span>
                 <div className="tw-my-[20px] tw-border-l-[1px] tw-border-black tw-px-[25px]">
                     <div>
